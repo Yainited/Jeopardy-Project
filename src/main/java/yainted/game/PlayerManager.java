@@ -1,5 +1,9 @@
 package yainted.game;
 
+import yainted.events.EnterPlayerNameGameEvent;
+import yainted.events.SelectPlayerCountGameEvent;
+import yainted.observer.EventManager;
+
 import java.util.ArrayList;
 
 public class PlayerManager {

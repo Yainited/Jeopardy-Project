@@ -1,12 +1,13 @@
 package yainted.events;
 
+import yainted.model.Question;
+
 public class SelectQuestionGameEvent extends GameEvent {
-    public SelectQuestionGameEvent(String caseID, String playerID, String category, int questionValue) {
+    public SelectQuestionGameEvent(String playerID, Question question) {
         super();
-        this.caseID = caseID;
         this.playerID = playerID;
         this.activity = "Select Question";
-        this.category = category;
-        this.questionValue = Integer.toString(questionValue);
+        this.category = question.getCategory();
+        this.questionValue = String.valueOf(question.getValue());
     }
 }

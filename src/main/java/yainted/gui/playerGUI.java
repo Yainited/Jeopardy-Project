@@ -1,5 +1,8 @@
 package yainted.gui;
 
+import yainted.events.EnterPlayerNameGameEvent;
+import yainted.observer.EventManager;
+
 public class playerGUI {
     private javax.swing.JTextField playerNameField;
     private javax.swing.JTextField playerScoreLabel;

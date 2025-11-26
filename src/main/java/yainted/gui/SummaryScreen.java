@@ -4,6 +4,11 @@
  */
 package yainted.gui;
 
+import yainted.events.ExitGameEvent;
+import yainted.events.GenerateEventLogGameEvent;
+import yainted.events.GenerateReportEvent;
+import yainted.observer.EventManager;
+
 /**
  *
  * @author Tyham
@@ -77,6 +82,9 @@ public class SummaryScreen extends javax.swing.JPanel {
         // TODO add your handling code here:
         String selectedFormat = jComboBox1.getSelectedItem().toString();
         this.mainFrame.sendReportFormat(selectedFormat);
+        EventManager.getInstance().notifyObservers(new GenerateEventLogGameEvent());
+        EventManager.getInstance().notifyObservers(new ExitGameEvent());
+        EventManager.getInstance().getEventLogger().generateEventLogCSV();
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 

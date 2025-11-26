@@ -1,6 +1,9 @@
 package yainted.strategy;
 
+import yainted.events.GenerateReportEvent;
+import yainted.game.Player;
 import yainted.model.TurnSnapshot;
+import yainted.observer.EventManager;
 
 import java.util.List;
 
@@ -14,7 +17,8 @@ public class ReportContext {
     public void setStrategy(ReportStrategy strategy) {
         this.strategy = strategy;
     }
-    public void generateReport(List<TurnSnapshot> turnSnapshots, String filename) {
-        strategy.generateReport(turnSnapshots, filename);
+    public void generateReport(List<TurnSnapshot> turnSnapshots, List<Player> players) {
+        strategy.generateReport(turnSnapshots, players);
+        EventManager.getInstance().notifyObservers(new GenerateReportEvent());
     }
 }

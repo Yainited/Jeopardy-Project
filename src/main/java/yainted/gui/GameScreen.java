@@ -5,8 +5,12 @@
 package yainted.gui;
 
 import java.util.ArrayList;
+
+import yainted.events.ExitGameEvent;
+import yainted.events.GenerateEventLogGameEvent;
 import yainted.game.Player;
 import yainted.gui.playerGUI;
+import yainted.observer.EventManager;
 
 /**
  *

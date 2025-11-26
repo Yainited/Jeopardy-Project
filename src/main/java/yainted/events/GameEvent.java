@@ -1,4 +1,6 @@
 package yainted.events;
+import yainted.observer.EventManager;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +18,7 @@ public abstract class GameEvent {
     protected String scoreAfterPlay;
 
     public GameEvent() {
-        caseID = "";
+        caseID = EventManager.getInstance().getCaseid();
         playerID = "";
         activity = "";
         timestamp = LocalDateTime.now().format(formatter);

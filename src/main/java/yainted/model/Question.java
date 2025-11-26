@@ -39,6 +39,10 @@ public class Question {
     public String getAnswer() { return answer; }
     public void setAnswer(String answer) { this.answer = answer; }
 
+    public String getOptionValue(String option) {
+        return options.get(option);
+    }
+
     @Override
     public String toString() {
         return String.format(

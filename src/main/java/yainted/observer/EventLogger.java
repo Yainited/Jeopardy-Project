@@ -1,6 +1,7 @@
 package yainted.observer;
 
 import yainted.events.GameEvent;
+import yainted.events.GenerateEventLogGameEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,13 +35,13 @@ public class EventLogger implements GameObserver {
         );
     }
 
-    public void generateEventLogCSV(String filename) {
+    public void generateEventLogCSV() {
+        String filename = "EVENT_LOG_" + eventLog.get(0).getCaseID() + ".csv";
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
             writer.println("Case_ID,Player_ID,Activity,Timestamp,Category,Question_Value,Answer_Given,Result,Score_After_Play");
             for (GameEvent gameEvent : this.eventLog) {
                 writer.println(formatEventAsCSV(gameEvent));
             }
-
             System.out.println("Event log generated: " + filename);
 
         } catch (IOException e) {
