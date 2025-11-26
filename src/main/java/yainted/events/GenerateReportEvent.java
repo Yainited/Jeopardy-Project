@@ -1,4 +1,4 @@
-package yainted;
+package yainted.events;
 
 public class GenerateReportEvent extends GameEvent {
     public GenerateReportEvent(String caseID) {

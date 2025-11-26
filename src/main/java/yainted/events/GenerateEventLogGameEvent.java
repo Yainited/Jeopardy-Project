@@ -1,4 +1,4 @@
-package yainted;
+package yainted.events;
 
 public class GenerateEventLogGameEvent extends GameEvent {
     public GenerateEventLogGameEvent(String caseID) {

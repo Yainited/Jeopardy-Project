@@ -1,4 +1,6 @@
-package yainted;
+package yainted.observer;
+
+import yainted.events.GameEvent;
 
 import java.util.ArrayList;
 import java.util.List;

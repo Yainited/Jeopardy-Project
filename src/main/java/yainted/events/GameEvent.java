@@ -1,4 +1,4 @@
-package yainted;
+package yainted.events;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

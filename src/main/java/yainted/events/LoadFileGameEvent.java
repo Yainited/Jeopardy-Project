@@ -1,4 +1,4 @@
-package yainted;
+package yainted.events;
 
 public class LoadFileGameEvent extends GameEvent {
     public LoadFileGameEvent(String caseID, String result) {

@@ -1,4 +1,4 @@
-package yainted;
+package yainted.events;
 
 public class SelectCategoryGameEvent extends GameEvent {
     public SelectCategoryGameEvent(String caseID, String playerID, String category) {

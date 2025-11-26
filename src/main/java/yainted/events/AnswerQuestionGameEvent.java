@@ -1,4 +1,4 @@
-package yainted;
+package yainted.events;
 
 public class AnswerQuestionGameEvent extends GameEvent {
     public AnswerQuestionGameEvent(String caseID, String playerID, String category, int questionValue, String answerGiven, String result, int currentScore) {

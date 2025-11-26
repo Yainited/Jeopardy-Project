@@ -1,4 +1,4 @@
-package yainted;
+package yainted.events;
 
 public class SelectPlayerCountGameEvent extends GameEvent {
     public SelectPlayerCountGameEvent(String caseID, int playerCount) {

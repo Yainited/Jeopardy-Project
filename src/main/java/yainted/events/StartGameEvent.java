@@ -1,4 +1,4 @@
-package yainted;
+package yainted.events;
 
 public class StartGameEvent extends GameEvent {
     public StartGameEvent(String caseID) {
