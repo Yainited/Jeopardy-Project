@@ -9,8 +9,15 @@ import java.util.List;
 import org.apache.poi.xwpf.usermodel.*;
 import yainted.observer.EventManager;
 
+/**
+ * The DocxReportStrategy class generates a DOCX report of the game.
+ */
 public class DocxReportStrategy implements ReportStrategy {
 
+    /** Generates a DOCX report of the game.
+     * @param turnSnapshots The list of turn snapshots.
+     * @param players The list of players.
+     */
     @Override
     public void generateReport(List<TurnSnapshot> turnSnapshots, List<Player> players) {
         List<String> playerNames = new ArrayList<>();

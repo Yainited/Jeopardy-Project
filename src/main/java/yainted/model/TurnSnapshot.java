@@ -2,6 +2,9 @@ package yainted.model;
 
 import yainted.game.Player;
 
+/**
+ * Represents a snapshot of a turn in the game.
+ */
 public class TurnSnapshot {
     private int turnNumber;
     private String playerName;

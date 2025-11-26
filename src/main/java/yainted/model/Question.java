@@ -2,6 +2,9 @@ package yainted.model;
 
 import java.util.Map;
 
+/**
+ * Represents a question in the game.
+ */
 public class Question {
     private String id;
     private String category;

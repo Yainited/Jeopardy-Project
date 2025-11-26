@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The EventManager class manages game events and notifies observers.
+ */
 public class EventManager {
     private String caseid;
     private PlayerManager playerManager;

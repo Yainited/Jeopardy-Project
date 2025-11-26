@@ -7,8 +7,16 @@ import java.util.List;
 import java.util.Map;
 import yainted.model.Question;
 
+/**
+ * The CsvQuestionParser class implements the QuestionParser interface to parse questions from CSV files.
+ */
 public class CsvQuestionParser implements QuestionParser {
 
+    /** Parses questions from the given CSV file.
+     * @param file The CSV file containing questions.
+     * @return A list of Question objects.
+     * @throws IOException If an I/O error occurs.
+     */
     @Override
     public List<Question> parse(File file) throws IOException {
         List<Question> questions = new ArrayList<>();
@@ -48,12 +56,22 @@ public class CsvQuestionParser implements QuestionParser {
         return questions;
     }
 
+    /** Retrieves a column value from the list based on the header index.
+     * @param cols The list of column values.
+     * @param idx The map of header names to their indices.
+     * @param key The header name to look for.
+     * @return The column value, or null if not found.
+     */
     private String getColumn(List<String> cols, Map<String, Integer> idx, String key) {
         Integer i = idx.get(key.toLowerCase());
         if (i == null || i >= cols.size()) return null;
         return cols.get(i);
     }
 
+    /** Splits a CSV line into individual column values, handling quoted commas.
+     * @param line The CSV line to split.
+     * @return A list of column values.
+     */
     private List<String> splitCsvLine(String line) {
         List<String> res = new ArrayList<>();
         StringBuilder cur = new StringBuilder();

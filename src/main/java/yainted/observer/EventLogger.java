@@ -9,6 +9,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The EventLogger class logs game events and generates a CSV log file.
+ */
 public class EventLogger implements GameObserver {
     private List<GameEvent> eventLog;
 
@@ -16,11 +19,18 @@ public class EventLogger implements GameObserver {
         this.eventLog = new ArrayList<>();
     }
 
+    /** Updates the event log with a new game event.
+     * @param gameEvent The game event to log.
+     */
     @Override
     public void update(GameEvent gameEvent) {
         this.eventLog.add(gameEvent);
     }
 
+    /** Formats a game event as a CSV string.
+     * @param event The game event to format.
+     * @return A CSV-formatted string representing the event.
+     */
     public String formatEventAsCSV(GameEvent event) {
         return String.join(",",
                 event.getCaseID(),
@@ -35,6 +45,7 @@ public class EventLogger implements GameObserver {
         );
     }
 
+    /** Generates a CSV file containing the event log. */
     public void generateEventLogCSV() {
         String filename = "EVENT_LOG_" + eventLog.get(0).getCaseID() + ".csv";
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {

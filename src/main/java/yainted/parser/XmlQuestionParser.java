@@ -10,8 +10,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import yainted.model.Question;
 import org.w3c.dom.*;
 
+/**
+ * The XmlQuestionParser class parses questions from an XML file.
+ */
 public class XmlQuestionParser implements QuestionParser {
 
+    /** Parses questions from the given XML file.
+     * @param file The XML file containing questions.
+     * @return A list of Question objects.
+     */
     @Override
     public List<Question> parse(File file) {
         List<Question> questions = new ArrayList<>();
@@ -52,6 +59,11 @@ public class XmlQuestionParser implements QuestionParser {
         return questions;
     }
 
+    /** Retrieves the text content of a child element by tag name.
+     * @param parent The parent element.
+     * @param tagName The tag name of the child element.
+     * @return The trimmed text content of the child element, or null if not found.
+     */
     private String getChildText(Element parent, String tagName) {
         NodeList nl = parent.getElementsByTagName(tagName);
         if (nl.getLength() == 0) return null;

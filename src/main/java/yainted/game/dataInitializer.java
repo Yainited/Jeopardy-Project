@@ -8,7 +8,10 @@ import yainted.model.Question;
 import yainted.parser.QuestionParser;
 import yainted.parser.QuestionParserFactory;
 
-public class dataInitializer {
+/**
+ * Initializes game data by loading questions from a specified file.
+ */
+public class DataInitializer {
     public static ArrayList<Question> getQuestions(String path)
     {
         File f = new File(path);

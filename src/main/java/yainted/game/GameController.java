@@ -11,6 +11,9 @@ import yainted.strategy.PdfReportStrategy;
 import yainted.strategy.ReportContext;
 import yainted.strategy.TxtReportStrategy;
 
+/**
+ * The GameController class manages the interactions between the model and view.
+ */
 public class GameController {
     private GameLogic gameLogic;
     private GameView gameView;
@@ -19,9 +22,12 @@ public class GameController {
         this.gameView = new GameView(this);
     }
 
+    /**
+     * Sends the file path while notifying observers with a LoadFileGameEvent.
+     */
     public void getFilePath(String path)
     {
-        ArrayList<Question> questions = dataInitializer.getQuestions(path);
+        ArrayList<Question> questions = DataInitializer.getQuestions(path);
         if (questions.isEmpty()) {
             EventManager.getInstance().notifyObservers(new LoadFileGameEvent("Failed"));
             throw new IllegalArgumentException("No questions loaded from the file: " + path);
@@ -29,28 +35,46 @@ public class GameController {
         this.gameLogic = new GameLogic(questions);
         EventManager.getInstance().notifyObservers(new LoadFileGameEvent("Success"));
     }
+
+    /**
+     * Sends the player names to the game logic.
+     */
     public void getPlayers(java.util.ArrayList<String> players)
     {
         this.gameLogic.setPlayers(players);
     }
+
+    /** Retrieves the list of players from the game logic.
+     * @return The list of players.
+     */
     public ArrayList<Player> sendPlayersToView()
     {
         return this.gameLogic.getPlayers();
     }
+    /** Selects a question based on value and category.
+     * @param value The value of the question.
+     * @param category The category of the question.
+     * @return The selected Question object.
+     */
     public Question selectQuestion(String value, String category)
     {
         String id = category + "_" + value;
         this.gameLogic.PlayerChooseQuestion(id);
         return this.gameLogic.getQuestionByID(id);
     }
+    /** Retrieves the current question.
+     * @return The current Question object.
+     */
     public Question getCurrentQuestion()
     {
         return this.gameLogic.getCurrentQuestion();
     }
 
+    /** Sets the report format for the game.
+     * @param format The report format to set.
+     */
     public void setReportFormat(String format)
     {
-        // Pass the report format to the GameLogic or relevant component
         String reportFormat = format.toUpperCase();
         ReportContext reportContext;
         switch (reportFormat) {
@@ -69,6 +93,10 @@ public class GameController {
         }
 
     }
+    /** Validates the given answer.
+     * @param ans The answer to validate.
+     * @return True if the answer is correct, false otherwise.
+     */
     public Boolean validateAnswer(String ans)
     {
         Boolean test =  this.gameLogic.AnswerQuestion(ans);

@@ -11,6 +11,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The TxtReportStrategy class generates a TXT report of the game.
+ */
 public class TxtReportStrategy implements ReportStrategy {
 
     @Override

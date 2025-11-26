@@ -11,8 +11,15 @@ import yainted.observer.EventManager;
 
 import java.io.FileOutputStream;
 
+/**
+ * The PdfReportStrategy class generates a PDF report of the game.
+ */
 public class PdfReportStrategy implements ReportStrategy {
 
+    /** Generates a PDF report of the game.
+     * @param turnSnapshots The list of turn snapshots.
+     * @param players The list of players.
+     */
     @Override
     public void generateReport(List<TurnSnapshot> turnSnapshots, List<Player> players) {
         List<String> playerNames = new ArrayList<>();

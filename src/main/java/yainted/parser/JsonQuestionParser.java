@@ -9,6 +9,11 @@ import yainted.model.Question;
 
 public class JsonQuestionParser implements QuestionParser {
 
+    /** Parses questions from the given JSON file.
+     * @param file The JSON file containing questions.
+     * @return A list of Question objects.
+     * @throws IOException If an I/O error occurs.
+     */
     @Override
     public List<Question> parse(File file) throws IOException {
         String raw = readAll(file);
@@ -40,6 +45,11 @@ public class JsonQuestionParser implements QuestionParser {
         return questions;
     }
 
+    /** Reads the entire content of a file into a string.
+     * @param file The file to read.
+     * @return The content of the file as a string.
+     * @throws IOException If an I/O error occurs.
+     */
     private String readAll(File file) throws IOException {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -49,6 +59,10 @@ public class JsonQuestionParser implements QuestionParser {
         return sb.toString();
     }
 
+    /** Parses a JSON object string into a Question object.
+     * @param obj The JSON object as a string.
+     * @return The Question object, or null if parsing fails.
+     */
     private Question parseObject(String obj) {
         String category = extractString(obj, "Category");
         if (category == null) category = extractString(obj, "category");
@@ -78,6 +92,12 @@ public class JsonQuestionParser implements QuestionParser {
         return new Question(category, value, questionText, answer, opts);
     }
 
+    /** Extracts a nested string value from a JSON object.
+     * @param json The JSON object as a string.
+     * @param parent The parent key containing the nested object.
+     * @param key The key within the nested object.
+     * @return The string value, or null if not found.
+     */
     private String extractNested(String json, String parent, String key) {
         int p = json.indexOf("\"" + parent + "\"");
         if (p == -1) return null;
@@ -89,6 +109,11 @@ public class JsonQuestionParser implements QuestionParser {
         return extractString(sub, key);
     }
 
+    /** Extracts a string value associated with the given key in the JSON object.
+     * @param json The JSON object as a string.
+     * @param key The key whose value to extract.
+     * @return The string value, or null if not found.
+     */
     private String extractString(String json, String key) {
         String raw = extractRaw(json, key);
         if (raw == null) return null;
@@ -98,6 +123,11 @@ public class JsonQuestionParser implements QuestionParser {
         return raw;
     }
 
+    /** Extracts the raw value (string or number) associated with the given key in the JSON object.
+     * @param json The JSON object as a string.
+     * @param key The key whose value to extract.
+     * @return The raw value as a string, or null if not found.
+     */
     private String extractRaw(String json, String key) {
         String pattern = "\"" + key + "\"";
         int idx = json.indexOf(pattern);

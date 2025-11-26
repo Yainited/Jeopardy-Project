@@ -13,6 +13,9 @@ import yainted.model.Question;
 import yainted.model.TurnSnapshot;
 import yainted.observer.EventManager;
 
+/**
+ * The GameLogic class handles the core mechanics of the game.
+ */
 public class GameLogic {
 
     private List<TurnSnapshot> turnHistory;
@@ -24,14 +27,21 @@ public class GameLogic {
         this.questionManager = new QuestionManager(questions);
     }
 
+    /** Player selects a question by its ID.
+     * @param questionID The ID of the question to select.
+     */
     public void PlayerChooseQuestion(String questionID) {
         questionManager.setCurrentQuestion(questionID);
         EventManager.getInstance().notifyObservers(new SelectQuestionGameEvent(playerManager.getCurrentPlayer().getName(), questionManager.getCurrentQuestion()));
     }
+    /** Advances to the next player's turn. */
     public void NextTurn() {
         playerManager.advanceTurn();
     }
 
+    /** Sets the players for the game.
+     * @param players The list of player names.
+     */
     public void setPlayers(ArrayList<String> players) {
         EventManager.getInstance().notifyObservers(new SelectPlayerCountGameEvent(players.size()));
         this.playerManager = new PlayerManager(players);
@@ -40,16 +50,30 @@ public class GameLogic {
         }
     }
 
+    /** Retrieves a question by its ID.
+     * @param questionID The ID of the question.
+     * @return The Question object.
+     */
     public Question getQuestionByID(String questionID) {
         return questionManager.getQuestionById(questionID);
     }
+    /** Retrieves the list of players.
+     * @return The list of players.
+     */
     public ArrayList<Player> getPlayers() {
         return playerManager.getPlayers();
     }
+    /** Retrieves the current question.
+     * @return The current Question object.
+     */
     public Question getCurrentQuestion() {
         return questionManager.getCurrentQuestion();
     }
 
+    /** Validates the given answer.
+     * @param answer The answer to validate.
+     * @return True if the answer is correct, false otherwise.
+     */
     public Boolean AnswerQuestion(String answer) {
         Question currentQuestion = questionManager.getCurrentQuestion();
         if (currentQuestion == null) {
@@ -74,5 +98,8 @@ public class GameLogic {
             return false;
         }
     }
+    /** Retrieves the turn history.
+     * @return The list of TurnSnapshot objects.
+     */
     public List<TurnSnapshot> getTurnHistory() { return turnHistory; }
 }
