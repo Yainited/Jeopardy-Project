@@ -12,21 +12,20 @@ public class Question {
 
     public Question() {}
 
-    public Question(String id, String category, int value, String text, String answer, Map<String, String> options) {
-        this.id = id;
+    public Question(String category, int value, String text, String answer, Map<String, String> options) {
         this.category = category;
         this.value = value;
         this.text = text;
         this.answer = answer;
         this.options = options;
+        this.id = category + "_" + value;
     }
 
     // getters / setters
+    public String getId() { return id; }
+
     public Map<String, String> getOptions() { return options; }
     public void setOptions(Map<String, String> options) { this.options = options; }
-
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
 
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
@@ -43,8 +42,8 @@ public class Question {
     @Override
     public String toString() {
         return String.format(
-            "Question{id=%s, category=%s, value=%d, text=%s, answer=%s, options=%s}",
-            id, category, value, text, answer, options
+            "Question{category=%s, value=%d, text=%s, answer=%s, options=%s}",
+            category, value, text, answer, options
         );
     }
 }

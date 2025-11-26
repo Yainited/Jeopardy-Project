@@ -1,18 +1,23 @@
 package yainted.game;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PlayerManager {
 
-    private List<Player> players;
+    private ArrayList<Player> players;
     private int index = 0;
     private Player currentPlayer;
 
-    public PlayerManager(List<Player> players) {
-        this.players = players;
-        currentPlayer = players.get(0);
+    public PlayerManager(ArrayList<String> playersName) {
+        this.players = new ArrayList<>();
+        for (String name : playersName) {
+            this.players.add(new Player(name));
+        }
+        currentPlayer = this.players.get(0);
     }
-
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
     public Player getCurrentPlayer() {
         return currentPlayer;
     }

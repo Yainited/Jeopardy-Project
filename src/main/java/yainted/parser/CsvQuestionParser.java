@@ -42,7 +42,7 @@ public class CsvQuestionParser implements QuestionParser {
                 opts.put("D", getColumn(cols, idx, "optiond"));
 
                 if (category == null || questionText == null || answer == null) continue;
-                questions.add(new Question(null, category, value, questionText, answer, opts));
+                questions.add(new Question(category, value, questionText, answer, opts));
             }
         }
         return questions;

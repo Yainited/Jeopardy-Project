@@ -1,6 +1,6 @@
 package yainted.game;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import yainted.model.Question;
 
@@ -9,9 +9,8 @@ public class GameLogic {
     private PlayerManager playerManager;
     private QuestionManager questionManager;
 
-    public GameLogic(List<Player> players, List<Question> questions) {
+    public GameLogic(ArrayList<Question> questions) {
         this.questionManager = new QuestionManager(questions);
-        this.playerManager = new PlayerManager(players);
     }
 
     public void PlayerChooseQuestion(String questionID) {
@@ -22,20 +21,38 @@ public class GameLogic {
         playerManager.advanceTurn();
     }
 
-    public void AnswerQuestion(String answer) {
+    public void setPlayers(ArrayList<String> players) {
+        this.playerManager = new PlayerManager(players);
+    }
+
+    public Question getQuestionByID(String questionID) {
+        return questionManager.getQuestionById(questionID);
+    }
+    public ArrayList<Player> getPlayers() {
+        return playerManager.getPlayers();
+    }
+    public Question getCurrentQuestion() {
+        return questionManager.getCurrentQuestion();
+    }
+    public Boolean AnswerQuestion(String answer) {
         Question currentQuestion = questionManager.getCurrentQuestion();
         if (currentQuestion == null) {
             throw new IllegalStateException("No current question to answer.");
         }
         Player currentPlayer = playerManager.getCurrentPlayer();
         if (currentQuestion.getAnswer().equalsIgnoreCase(answer)) {
+
             currentPlayer.addScore(currentQuestion.getValue());
+            questionManager.setCurrentQuestion(null);
+            NextTurn();
+            return true;
         } 
         else {
             currentPlayer.deductScore(currentQuestion.getValue());
+            questionManager.setCurrentQuestion(null);
+            NextTurn();
+            return false;
         }
-        questionManager.setCurrentQuestion(null);
-        NextTurn();
     }
 
 }

@@ -75,7 +75,7 @@ public class JsonQuestionParser implements QuestionParser {
 
         if (category == null || questionText == null || answer == null) return null;
 
-        return new Question(id, category, value, questionText, answer, opts);
+        return new Question(category, value, questionText, answer, opts);
     }
 
     private String extractNested(String json, String parent, String key) {

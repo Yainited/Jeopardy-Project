@@ -44,7 +44,7 @@ public class XmlQuestionParser implements QuestionParser {
                 }
 
                 if (category == null || questionText == null || answer == null) continue;
-                questions.add(new Question(null, category, value, questionText, answer, opts));
+                questions.add(new Question(category, value, questionText, answer, opts));
             }
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse XML: " + e.getMessage(), e);

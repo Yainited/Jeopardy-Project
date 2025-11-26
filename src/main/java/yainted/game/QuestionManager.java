@@ -1,14 +1,14 @@
 package yainted.game;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import yainted.model.Question;
 
 public class QuestionManager {
-    private List<Question> questions;
+    private ArrayList<Question> questions;
     private Question currentQuestion;
 
-    public QuestionManager(List<Question> questions) {
+    public QuestionManager(ArrayList<Question> questions) {
         this.questions = questions;
     }
 
@@ -21,14 +21,6 @@ public class QuestionManager {
         return null;
     }
 
-    public Question getQuestionByValue(int value, String category) {
-        Question question = questions.stream()
-            .filter(q -> q.getValue() == value && !q.isUsed() && q.getCategory().equalsIgnoreCase(category))
-            .findFirst()
-            .orElse(null);
-        return question;
-    }
-
     public void setCurrentQuestion(String questionId) {
         this.currentQuestion = getQuestionById(questionId);
     }
@@ -37,7 +29,7 @@ public class QuestionManager {
         return currentQuestion;
     }
 
-    public List<Question> getQuestions() {
+    public ArrayList<Question> getQuestions() {
         return questions;
     }
 }
