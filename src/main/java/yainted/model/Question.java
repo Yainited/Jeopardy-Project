@@ -1,4 +1,4 @@
-package model;
+package yainted.model;
 
 import java.util.Map;
 

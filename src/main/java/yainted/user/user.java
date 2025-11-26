@@ -1,1 +1,1 @@
-package user;
+package yainted.user;

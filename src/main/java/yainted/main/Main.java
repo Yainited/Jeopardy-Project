@@ -1,11 +1,11 @@
-package main;
+package yainted.main;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import model.Question;
-import parser.QuestionParser;
-import parser.QuestionParserFactory;
+import yainted.model.Question;
+import yainted.parser.QuestionParser;
+import yainted.parser.QuestionParserFactory;
 
 public class Main {
     public static void main(String[] args) {

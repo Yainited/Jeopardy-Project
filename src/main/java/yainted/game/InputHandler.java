@@ -1,4 +1,4 @@
-package yainted;
+package yainted.game;
 
 public class InputHandler {
     

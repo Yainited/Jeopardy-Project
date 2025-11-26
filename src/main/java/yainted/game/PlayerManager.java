@@ -1,5 +1,7 @@
 package yainted.game;
 
+import java.util.List;
+
 public class PlayerManager {
 
     private List<Player> players;

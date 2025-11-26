@@ -1,4 +1,4 @@
-package parser;
+package yainted.parser;
 
 
 public class QuestionParserFactory {

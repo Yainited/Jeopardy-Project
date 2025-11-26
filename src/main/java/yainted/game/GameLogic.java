@@ -1,9 +1,8 @@
 package yainted.game;
 
 import java.util.List;
-import java.util.Locale.Category;
 
-import yainted.models.Player;
+import yainted.model.Question;
 
 public class GameLogic {
     

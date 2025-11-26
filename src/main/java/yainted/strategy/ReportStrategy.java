@@ -1,6 +1,6 @@
 package yainted.strategy;
 
-import yainted.TurnSnapshot;
+import yainted.model.TurnSnapshot;
 
 import java.util.List;
 

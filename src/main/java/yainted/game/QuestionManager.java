@@ -1,9 +1,8 @@
-package yainted;
+package yainted.game;
 
 import java.util.List;
-import java.util.Locale.Category;
 
-import model.Question;
+import yainted.model.Question;
 
 public class QuestionManager {
     private List<Question> questions;

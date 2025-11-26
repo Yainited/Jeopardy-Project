@@ -1,4 +1,4 @@
-package parser;
+package yainted.parser;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import model.Question;
+import yainted.model.Question;
 import org.w3c.dom.*;
 
 public class XmlQuestionParser implements QuestionParser {

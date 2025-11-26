@@ -1,4 +1,4 @@
-package yainted;
+package yainted.model;
 
 public class TurnSnapshot {
     String playerName;

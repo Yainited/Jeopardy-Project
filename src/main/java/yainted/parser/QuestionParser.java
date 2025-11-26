@@ -1,9 +1,9 @@
-package parser;
+package yainted.parser;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import model.Question;
+import yainted.model.Question;
 
 
 public interface QuestionParser {

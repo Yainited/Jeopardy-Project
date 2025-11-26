@@ -1,4 +1,4 @@
-package yainted.models;
+package yainted.game;
 
 public class Player {
 
