@@ -135,12 +135,26 @@ public class QuestionParserTest {
         assertEquals("Reaver", q.getOptions().get("C"));
         assertEquals("Oni", q.getOptions().get("D"));
     }
-
+    
     @Test
     public void testGetCsvParser() {
         QuestionParser parser = QuestionParserFactory.getParser("questions.csv");
         assertNotNull(parser, "Parser should not be null");
         assertTrue(parser instanceof CsvQuestionParser, "Parser should be an instance of CsvQuestionParser");
+    }
+
+    @Test
+    public void testGetJsonParser() {
+        QuestionParser parser = QuestionParserFactory.getParser("questions.JSON"); 
+        assertNotNull(parser);
+        assertTrue(parser instanceof JsonQuestionParser, "Parser should be an instance of JsonQuestionParser");
+    }
+
+    @Test
+    public void testGetXmlParser() {
+        QuestionParser parser = QuestionParserFactory.getParser("questions.Xml"); // mixed case
+        assertNotNull(parser);
+        assertTrue(parser instanceof XmlQuestionParser, "Parser should be an instance of XmlQuestionParser");
     }
 
 }
