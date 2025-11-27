@@ -57,7 +57,7 @@ public class QuestionParserTest {
     }
 
     @Test
-    public void testParseValorantVandalQuestion() throws Exception {
+    public void testParseValidJSON() throws Exception {
         String jsonContent = "[\n" +
                 "  {\n" +
                 "    \"Category\": \"Valorant\",\n" +
@@ -101,7 +101,7 @@ public class QuestionParserTest {
     }
 
     @Test
-    public void testParseValorantPhantomQuestion() throws Exception {
+    public void testParseValidXML() throws Exception {
         String xmlContent = "<JeopardyQuestions>\n" +
                 "  <QuestionItem>\n" +
                 "    <Category>Valorant</Category>\n" +
