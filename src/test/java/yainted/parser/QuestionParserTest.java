@@ -157,5 +157,16 @@ public class QuestionParserTest {
         assertTrue(parser instanceof XmlQuestionParser, "Parser should be an instance of XmlQuestionParser");
     }
 
+    @Test
+    public void testUnsupportedFileType() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            QuestionParserFactory.getParser("questions.txt");
+        });
+
+        String expectedMessage = "Unsupported file type";
+        assertTrue(exception.getMessage().contains(expectedMessage),
+                "Exception message should contain 'Unsupported file type'");
+    }
+
 }
 
