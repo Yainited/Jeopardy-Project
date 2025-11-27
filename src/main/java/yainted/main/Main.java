@@ -1,11 +1,5 @@
 package yainted.main;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 import yainted.gui.CreatePlayers;
 import yainted.gui.FileChooser;
 import yainted.gui.GameScreen;
@@ -20,7 +14,6 @@ import yainted.events.StartGameEvent;
 import yainted.manager.GameData;
 import yainted.manager.PlayerManager;
 import yainted.manager.QuestionManager;
-import yainted.model.Player;
 import yainted.observer.EventLogger;
 import yainted.observer.EventManager;
 
