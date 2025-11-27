@@ -4,9 +4,13 @@ import yainted.observer.EventManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Abstract base class representing a game event in the system.
+ * Contains common attributes for tracking player activities, questions,
+ * answers, and scoring information during gameplay.
+ */
 public abstract class GameEvent {
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
     protected String caseID;
     protected String playerID;
     protected String activity;
@@ -17,6 +21,11 @@ public abstract class GameEvent {
     protected String result;
     protected String scoreAfterPlay;
 
+    /**
+     * Creates a new game event with default values.
+     * Initializes the case ID from the EventManager and sets the timestamp to current time.
+     * All other fields are initialized as empty strings.
+     */
     public GameEvent() {
         caseID = EventManager.getInstance().getCaseid();
         playerID = "";

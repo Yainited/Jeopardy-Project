@@ -13,6 +13,15 @@ public class TurnSnapshot {
     private String answerGiven;
     private Boolean correct;
 
+    /**
+     * Creates a new turn snapshot with the specified turn details.
+     *
+     * @param turnNumber the sequential number of this turn
+     * @param player the player taking the turn
+     * @param question the question being answered
+     * @param answerGiven the answer provided by the player
+     * @param correct whether the answer was correct
+     */
     public TurnSnapshot(int turnNumber, Player player, Question question, String answerGiven, Boolean correct) {
         this.turnNumber = turnNumber;
         this.playerName = player.getName();

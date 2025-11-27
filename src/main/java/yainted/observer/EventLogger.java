@@ -59,4 +59,8 @@ public class EventLogger implements GameObserver {
             System.err.println("Error generating event log: " + e.getMessage());
         }
     }
+
+    public List<GameEvent> getEventLog() {
+        return eventLog;
+    }
 }
