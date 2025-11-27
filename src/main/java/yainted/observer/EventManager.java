@@ -59,4 +59,8 @@ public class EventManager {
     public String getCaseid() {
         return caseid;
     }
+
+    public void clearObservers() {
+        observers.clear();
+    }
 }
