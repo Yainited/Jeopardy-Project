@@ -6,8 +6,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import yainted.model.Question;
-
+/**
+ * Parses quiz questions from a CSV file.  
+ * <p>
+ * Handles quoted fields, escaped quotes, and dynamic column ordering.
+ * Expected header examples include:
+ * <ul>
+ *   <li>Category</li>
+ *   <li>Question</li>
+ *   <li>CorrectAnswer / Answer</li>
+ *   <li>Value</li>
+ *   <li>OptionA, OptionB, OptionC, OptionD</li>
+ * </ul>
+ * </p>
+ */
 public class CsvQuestionParser implements QuestionParser {
+    /**
+     * Parses the CSV file into a list of {@link Question} objects.
+     *
+     * @param file the CSV file to read
+     * @return a list of parsed questions
+     * @throws IOException if the file cannot be read
+     */
 
     @Override
     public List<Question> parse(File file) throws IOException {
@@ -47,13 +67,18 @@ public class CsvQuestionParser implements QuestionParser {
         }
         return questions;
     }
-
+    /**
+     * Gets a column value safely from the parsed CSV row.
+     */
     private String getColumn(List<String> cols, Map<String, Integer> idx, String key) {
         Integer i = idx.get(key.toLowerCase());
         if (i == null || i >= cols.size()) return null;
         return cols.get(i);
     }
-
+    /**
+     * Splits a CSV line while supporting quoted values.
+     * Example: `"Hello, world",5,"A ""quote"""`.
+     */
     private List<String> splitCsvLine(String line) {
         List<String> res = new ArrayList<>();
         StringBuilder cur = new StringBuilder();

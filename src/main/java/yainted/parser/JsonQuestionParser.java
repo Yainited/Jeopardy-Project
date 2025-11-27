@@ -7,8 +7,23 @@ import java.util.List;
 import java.util.Map;
 import yainted.model.Question;
 
+/**
+ * Parses quiz questions from a JSON file.  
+ * <p>
+ * This implementation does NOT use a JSON library — instead it performs
+ * manual string parsing to remain lightweight and avoid external dependencies.
+ * It supports arrays of objects and nested "Options" fields.
+ * </p>
+ */
 public class JsonQuestionParser implements QuestionParser {
 
+    /**
+     * Reads and parses a JSON file containing an array of question objects.
+     *
+     * @param file the JSON file to parse
+     * @return a list of {@link Question} instances extracted from the file
+     * @throws IOException if the file cannot be read
+     */
     @Override
     public List<Question> parse(File file) throws IOException {
         String raw = readAll(file);
@@ -39,7 +54,9 @@ public class JsonQuestionParser implements QuestionParser {
 
         return questions;
     }
-
+    /**
+     * Reads the entire file into a single string.
+     */
     private String readAll(File file) throws IOException {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -48,7 +65,9 @@ public class JsonQuestionParser implements QuestionParser {
         }
         return sb.toString();
     }
-
+    /**
+     * Parses a single JSON object string into a {@link Question}.
+     */
     private Question parseObject(String obj) {
         String category = extractString(obj, "Category");
         if (category == null) category = extractString(obj, "category");
@@ -77,7 +96,9 @@ public class JsonQuestionParser implements QuestionParser {
 
         return new Question(category, value, questionText, answer, opts);
     }
-
+    /**
+     * Extracts a nested field inside an object field (e.g., "Options": { "A": "..." }).
+     */
     private String extractNested(String json, String parent, String key) {
         int p = json.indexOf("\"" + parent + "\"");
         if (p == -1) return null;
@@ -88,7 +109,9 @@ public class JsonQuestionParser implements QuestionParser {
         String sub = json.substring(start + 1, end);
         return extractString(sub, key);
     }
-
+    /**
+     * Extracts a raw or quoted JSON value for a given key.
+     */
     private String extractString(String json, String key) {
         String raw = extractRaw(json, key);
         if (raw == null) return null;
@@ -97,7 +120,9 @@ public class JsonQuestionParser implements QuestionParser {
             return raw.substring(1, raw.length() - 1).replace("\\\"", "\"").replace("\\n", "\n").replace("\\r", "\r").replace("\\\\", "\\");
         return raw;
     }
-
+    /**
+     * Extracts the raw JSON value following a key, including numbers or quoted text.
+     */
     private String extractRaw(String json, String key) {
         String pattern = "\"" + key + "\"";
         int idx = json.indexOf(pattern);

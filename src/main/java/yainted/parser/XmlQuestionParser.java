@@ -9,9 +9,34 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import yainted.model.Question;
 import org.w3c.dom.*;
-
+/**
+ * Parses quiz questions from an XML file using the DOM API.  
+ * <p>
+ * Expected XML structure:
+ * <pre>
+ * &lt;QuestionItem&gt;
+ *     &lt;Category&gt;...&lt;/Category&gt;
+ *     &lt;QuestionText&gt;...&lt;/QuestionText&gt;
+ *     &lt;CorrectAnswer&gt;...&lt;/CorrectAnswer&gt;
+ *     &lt;Value&gt;100&lt;/Value&gt;
+ *     &lt;Options&gt;
+ *         &lt;OptionA&gt;...&lt;/OptionA&gt;
+ *         &lt;OptionB&gt;...&lt;/OptionB&gt;
+ *         &lt;OptionC&gt;...&lt;/OptionC&gt;
+ *         &lt;OptionD&gt;...&lt;/OptionD&gt;
+ *     &lt;/Options&gt;
+ * &lt;/QuestionItem&gt;
+ * </pre>
+ * </p>
+ */
 public class XmlQuestionParser implements QuestionParser {
-
+    /**
+     * Parses the XML file into a list of {@link Question} objects.
+     *
+     * @param file the XML file containing questions
+     * @return list of parsed questions
+     * @throws RuntimeException if XML parsing fails
+     */
     @Override
     public List<Question> parse(File file) {
         List<Question> questions = new ArrayList<>();
@@ -51,7 +76,9 @@ public class XmlQuestionParser implements QuestionParser {
         }
         return questions;
     }
-
+    /**
+     * Returns the trimmed text content of a child element.
+     */
     private String getChildText(Element parent, String tagName) {
         NodeList nl = parent.getElementsByTagName(tagName);
         if (nl.getLength() == 0) return null;
