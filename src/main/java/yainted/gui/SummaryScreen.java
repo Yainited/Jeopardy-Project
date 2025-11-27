@@ -4,6 +4,7 @@
  */
 package yainted.gui;
 
+import yainted.controller.ReportController;
 import yainted.events.ExitGameEvent;
 import yainted.events.GenerateEventLogGameEvent;
 import yainted.events.GenerateReportEvent;
@@ -21,11 +22,16 @@ public class SummaryScreen extends javax.swing.JPanel {
      * Creates new form SetupScreen
      * @param frame
      */
+    private ReportController controller;
     private GameView mainFrame;
     
-    public SummaryScreen(GameView frame) {
+    public SummaryScreen(ReportController controller) {
         initComponents();
-        this.mainFrame = frame;
+        this.controller = controller;
+    }
+
+    public void setMainFrame(GameView mainFrame) {
+        this.mainFrame = mainFrame;
     }
 
     /**
@@ -81,7 +87,7 @@ public class SummaryScreen extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String selectedFormat = jComboBox1.getSelectedItem().toString();
-        this.mainFrame.sendReportFormat(selectedFormat);
+        controller.setReportFormat(selectedFormat);
         EventManager.getInstance().notifyObservers(new GenerateEventLogGameEvent());
         EventManager.getInstance().notifyObservers(new ExitGameEvent());
         EventManager.getInstance().getEventLogger().generateEventLogCSV();

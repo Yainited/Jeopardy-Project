@@ -1,7 +1,7 @@
 package yainted.strategy;
 
 import yainted.events.GenerateReportEvent;
-import yainted.game.Player;
+import yainted.model.Player;
 import yainted.model.TurnSnapshot;
 import yainted.observer.EventManager;
 

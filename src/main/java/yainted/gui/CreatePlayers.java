@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package yainted.gui;
+import yainted.controller.SetupController;
 /**
  *
  * @author Tyham
@@ -11,18 +12,22 @@ public class CreatePlayers extends javax.swing.JPanel {
 
     private java.util.ArrayList<javax.swing.JTextField> playerField;
     private GameView mainFrame;
+    private SetupController controller;
     
-    public CreatePlayers(GameView frame) {
+    public CreatePlayers(SetupController controller) {
+        this.controller = controller;
         initComponents();
         playerField = new java.util.ArrayList<>();
         playerField.add(jTextField1);
         playerField.add(jTextField2);
         playerField.add(jTextField3);
         playerField.add(jTextField4);
-        this.mainFrame = frame;
-        
     }
     
+    public void setMainFrame(GameView mainFrame) {
+        this.mainFrame = mainFrame;
+    }
+
     private void updatePlayerFields() {
         int numPlayers = Integer.parseInt(jComboBox1.getSelectedItem().toString());
 
@@ -129,10 +134,13 @@ public class CreatePlayers extends javax.swing.JPanel {
         }
 
         // Send the player names to GameView
-        this.mainFrame.sendPlayers(playerNames);
+        controller.recievePlayerNames(playerNames);
 
         // Switch to the GameScreen
-        this.mainFrame.switchPanel(new GameScreen(mainFrame));
+        this.mainFrame.getGameScreen().setCategoryAtStart();
+        this.mainFrame.getGameScreen().updateScreen();
+        this.mainFrame.getGameScreen().setVisibilityAtStart();
+        this.mainFrame.switchPanel(this.mainFrame.getGameScreen());
    
     }//GEN-LAST:event_jButton3ActionPerformed
 

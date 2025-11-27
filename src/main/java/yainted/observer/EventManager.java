@@ -1,8 +1,8 @@
 package yainted.observer;
 
 import yainted.events.GameEvent;
-import yainted.game.PlayerManager;
-import yainted.game.QuestionManager;
+import yainted.manager.PlayerManager;
+import yainted.manager.QuestionManager;
 
 import java.util.ArrayList;
 import java.util.List;

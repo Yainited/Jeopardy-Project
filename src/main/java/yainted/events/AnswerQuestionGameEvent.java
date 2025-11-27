@@ -1,6 +1,6 @@
 package yainted.events;
 
-import yainted.game.Player;
+import yainted.model.Player;
 import yainted.model.Question;
 
 public class AnswerQuestionGameEvent extends GameEvent {

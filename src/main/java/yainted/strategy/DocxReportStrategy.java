@@ -1,6 +1,6 @@
 package yainted.strategy;
 
-import yainted.game.Player;
+import yainted.model.Player;
 import yainted.model.TurnSnapshot;
 
 import java.io.FileOutputStream;

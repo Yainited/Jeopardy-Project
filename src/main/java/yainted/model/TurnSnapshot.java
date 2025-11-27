@@ -1,7 +1,5 @@
 package yainted.model;
 
-import yainted.game.Player;
-
 /**
  * Represents a snapshot of a turn in the game.
  */

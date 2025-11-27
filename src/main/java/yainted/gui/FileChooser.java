@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package yainted.gui;
+import yainted.controller.SetupController;
 
 /**
  *
@@ -10,13 +11,18 @@ package yainted.gui;
  */
 public class FileChooser extends javax.swing.JPanel {
 
+    private SetupController controller;
     private GameView mainFrame;
     /**
      * Creates new form FileChooser
      */
-    public FileChooser(GameView frame) {
-        this.mainFrame = frame;
+    public FileChooser(SetupController controller) {
+        this.controller = controller;
         initComponents();
+    }
+
+    public void setMainFrame(GameView mainFrame) {
+        this.mainFrame = mainFrame;
     }
 
     /**
@@ -85,11 +91,12 @@ public class FileChooser extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String path = jTextField1.getText();
         try{
-            this.mainFrame.sendFile(path);
+            this.controller.receiveFilePath(path);
         }
         catch (Exception exp)
         {
@@ -97,7 +104,7 @@ public class FileChooser extends javax.swing.JPanel {
             return;
         }
         javax.swing.JOptionPane.showMessageDialog(this, "File loaded successfully.");
-        this.mainFrame.switchPanel(new CreatePlayers(mainFrame));
+        this.mainFrame.switchPanel(this.mainFrame.getCreatePlayers());
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

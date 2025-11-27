@@ -10,6 +10,7 @@ public class Question {
     private String category;
     private int value;
     private String text;
+    private Boolean isAnswered;
     private String answer; // correct answer
     private Map<String, String> options; // A/B/C/D
 
@@ -21,11 +22,14 @@ public class Question {
         this.text = text;
         this.answer = answer;
         this.options = options;
+        this.isAnswered = false;
         this.id = category + "_" + value;
     }
 
     // getters / setters
     public String getId() { return id; }
+    public Boolean getIsAnswered() { return isAnswered; }
+    public void setIsAnswered(Boolean isAnswered) { this.isAnswered = isAnswered; }
 
     public Map<String, String> getOptions() { return options; }
     public void setOptions(Map<String, String> options) { this.options = options; }

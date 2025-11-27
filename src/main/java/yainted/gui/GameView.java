@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package yainted.gui;
-import yainted.gui.FileChooser;
-import yainted.game.GameController;
-import yainted.model.Question;
-import yainted.game.Player;
+
 
 /**
  *
@@ -16,21 +13,39 @@ public class GameView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GameView.class.getName());
     private javax.swing.JPanel currentPanel;
-    private GameController controller;
     private GameScreen gameScreen;
+    private FileChooser fileChooser;
+    private CreatePlayers createPlayers;
+    private SummaryScreen summaryScreen;
+    private SelectedQuestion selectedQuestion;
+    
     /**
      * Creates new form JeopardyWindow
      * @param control
      */
-    public GameView(GameController control) 
+    public GameView(GameScreen gameScreen, FileChooser fileChooser, CreatePlayers createPlayers, SelectedQuestion selectedQuestion, SummaryScreen summaryScreen) 
     {
-        this.controller = control;
         initComponents();
+        
+        this.gameScreen = gameScreen;
+        this.gameScreen.setMainFrame(this);
+
+        this.fileChooser = fileChooser;
+        this.fileChooser.setMainFrame(this);
+
+        this.createPlayers = createPlayers;
+        this.createPlayers.setMainFrame(this);
+
+        this.selectedQuestion = selectedQuestion;
+        this.selectedQuestion.setMainFrame(this);
+
+        this.summaryScreen = summaryScreen;
+        this.summaryScreen.setMainFrame(this);
         
         // Set up the layout before adding components
         getContentPane().setLayout(new java.awt.BorderLayout());
         
-        currentPanel = new FileChooser(this);
+        currentPanel = this.fileChooser;
         add(currentPanel, java.awt.BorderLayout.CENTER);
         
         // Pack and center the window
@@ -38,43 +53,7 @@ public class GameView extends javax.swing.JFrame {
         setLocationRelativeTo(null); // Center the window
         setVisible(true);
     }
-    public void setGameScreen(GameScreen screen)
-    {
-        this.gameScreen = screen;
-    }
-    public GameScreen getGameScreen()
-    {
-        return this.gameScreen;
-    }
-    public void sendFile(String path)
-    {
-        this.controller.getFilePath(path);
-    }
-    public void sendPlayers(java.util.ArrayList<String> players)
-    {
-        this.controller.getPlayers(players);
-    }
-    public java.util.ArrayList<Player> getPlayers()
-    {
-        return this.controller.sendPlayersToView();
-    }
-    public Question selectQuestion (String value, String category)
-    {
-        Question question = this.controller.selectQuestion(value, category);
-        return question;
-    }
-    public Boolean sendAnswer (String ans)
-    {
-        return controller.validateAnswer(ans);
-    }
-    public Question getCurrentQuestion()
-    {
-        return controller.getCurrentQuestion();
-    }
-    public void sendReportFormat(String format)
-    {
-        this.controller.setReportFormat(format);
-    }
+
     public void switchPanel(javax.swing.JPanel newPanel)
     {
         remove(currentPanel);
@@ -85,6 +64,15 @@ public class GameView extends javax.swing.JFrame {
         repaint();
         pack();
     }
+    public CreatePlayers getCreatePlayers() { return this.createPlayers; }
+    public SummaryScreen getSummaryScreen() { return this.summaryScreen; }
+    public GameScreen getGameScreen() { return this.gameScreen; }
+    public SelectedQuestion getSelectedQuestion() { return this.selectedQuestion;}
+
+    public void setCreatePlayers(CreatePlayers cp) { this.createPlayers = cp; }
+    public void setSummaryScreen(SummaryScreen ss) { this.summaryScreen = ss; }
+    public void setGameScreen(GameScreen gs) { this.gameScreen = gs; }
+    public void setSelectedQuestion(SelectedQuestion sq) { this.selectedQuestion = sq; }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

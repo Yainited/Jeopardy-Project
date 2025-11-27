@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package yainted.gui;
+import yainted.controller.QuestionController;
 import yainted.model.Question;
 
 /**
@@ -16,21 +17,27 @@ public class SelectedQuestion extends javax.swing.JPanel {
      * @param frame
      */
     private java.util.ArrayList<javax.swing.JRadioButton> optionButtons;
-    private GameView mainFrame; 
+    private QuestionController controller;
+    private GameView mainFrame;
     
-    public SelectedQuestion(GameView frame) {
+    public SelectedQuestion(QuestionController controller) {
         initComponents();
-        this.mainFrame = frame;
         optionButtons = new java.util.ArrayList<>();
         optionButtons.add(jRadioButton1);
         optionButtons.add(jRadioButton2);
         optionButtons.add(jRadioButton3);
         optionButtons.add(jRadioButton4);
-        setOptions();
+        this.controller = controller;
+        //setQuestion();
     }
-    public void setOptions()
+
+    public void setMainFrame(GameView mainFrame) {
+        this.mainFrame = mainFrame;
+    }
+
+    public void setQuestion()
     {
-        Question q = mainFrame.getCurrentQuestion();
+        Question q = controller.getCurrentQuestion();
         jTextArea1.setText(q.getText());
         java.util.Map<String, String> options = q.getOptions();
         for (int i = 0; i < optionButtons.size(); i++)
@@ -171,7 +178,7 @@ public class SelectedQuestion extends javax.swing.JPanel {
             {
                 String text = b.getText();
                 String ans = String.valueOf(text.charAt(0));
-                Boolean test = mainFrame.sendAnswer(ans);
+                Boolean test = controller.validateAnswer(ans);
                 checkAnswer(test);
             }
         }

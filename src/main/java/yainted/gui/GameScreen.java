@@ -6,10 +6,11 @@ package yainted.gui;
 
 import java.util.ArrayList;
 
+import yainted.controller.BoardController;
 import yainted.events.ExitGameEvent;
 import yainted.events.GenerateEventLogGameEvent;
-import yainted.game.Player;
 import yainted.gui.playerGUI;
+import yainted.model.Player;
 import yainted.observer.EventManager;
 
 /**
@@ -23,41 +24,63 @@ public class GameScreen extends javax.swing.JPanel {
      * @param frame
      */
     private GameView mainFrame;
-    private int numQuestions = 25;
     private ArrayList<playerGUI> playerData;
+    private BoardController controller;
             
-    public GameScreen( GameView frame ) {
+    public GameScreen(BoardController controller ) {
         initComponents();
-        this.mainFrame = frame;
+        this.controller = controller;
         this.playerData = new ArrayList<>();
         playerData.add( new playerGUI( jTextField1, jTextField5 ) );
         playerData.add( new playerGUI( jTextField2, jTextField6 ) );
         playerData.add( new playerGUI( jTextField3, jTextField7 ) );
         playerData.add( new playerGUI( jTextField4, jTextField8 ) );
-        this.mainFrame.setGameScreen(this);
         setVisibilityAtStart();
-        updateScreen();
+        //updateScreen();
+    }
+
+    public void setMainFrame(GameView mainFrame) {
+        this.mainFrame = mainFrame;
+    }
+
+    public void setCategoryAtStart()
+    {
+        ArrayList<String> categories = controller.getCategoryNames();
+        jTextArea1.setText(categories.get(0));
+        jTextArea2.setText(categories.get(1));
+        jTextArea3.setText(categories.get(2));
+        jTextArea4.setText(categories.get(3));
+        jTextArea5.setText(categories.get(4));
     }
 
     public void updateScreen()
     {
-        if (numQuestions == 0)
+        Boolean isGameOver = this.controller.isGameOver();
+        if (isGameOver)
         {
             javax.swing.JOptionPane.showMessageDialog(this, "Game Over!");
-            this.mainFrame.switchPanel(new SummaryScreen(mainFrame));
+            this.mainFrame.switchPanel(this.mainFrame.getSummaryScreen());
         }
         ArrayList<Player> players = new ArrayList<>();
-        players = this.mainFrame.getPlayers();
+        players = controller.getPlayers();
+        Player currentPlayer = controller.getCurrentPlayer();
         for ( int i = 0; i < players.size(); i++ )
         {
+            playerData.get(i).setTextColor( java.awt.Color.BLACK );
+            if ( players.get(i) == currentPlayer )
+            {
+                playerData.get(i).setTextColor( java.awt.Color.RED );
+            }   
             playerData.get(i).setPlayerName( players.get(i).getName() );
             playerData.get(i).setPlayerScore( players.get(i).getScore() );
         }
+        
+
     }
     public void setVisibilityAtStart ()
     {
         ArrayList<Player> players = new ArrayList<>();
-        players = this.mainFrame.getPlayers();
+        players = controller.getPlayers();
         int numPlayers = players.size();
         for ( int i = 0; i < numPlayers; i++ )
         {
@@ -75,10 +98,10 @@ public class GameScreen extends javax.swing.JPanel {
             javax.swing.JButton button = (javax.swing.JButton) source;
             String value = button.getText();
             String category = categoryName.getText();
-            this.mainFrame.selectQuestion(value, category);
+            controller.selectQuestion(value, category);
             button.setEnabled(false);
-            SelectedQuestion sq = new SelectedQuestion(this.mainFrame);
-            numQuestions --;
+            SelectedQuestion sq = this.mainFrame.getSelectedQuestion();
+            sq.setQuestion();
             this.mainFrame.switchPanel(sq);
         }
     }
@@ -589,7 +612,7 @@ public class GameScreen extends javax.swing.JPanel {
 
     private void QuitGame(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitGame
         // TODO add your handling code here:
-        this.mainFrame.switchPanel(new SummaryScreen(mainFrame));
+        this.mainFrame.switchPanel(this.mainFrame.getSummaryScreen());
     }//GEN-LAST:event_QuitGame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -25,4 +25,7 @@ public class playerGUI {
         playerNameField.setVisible(visible);
         playerScoreLabel.setVisible(visible);
     }
+    public void setTextColor(java.awt.Color color) {
+        playerNameField.setForeground(color);
+    }
 }
