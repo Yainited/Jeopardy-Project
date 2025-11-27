@@ -91,4 +91,48 @@ public class QuestionParserTest {
         assertEquals("Reaver", q.getOptions().get("C"));
         assertEquals("Oni", q.getOptions().get("D"));
     }
+    private File writeTempFile2(String name, String content) throws Exception {
+        File f = File.createTempFile(name, ".xml");
+        try (FileWriter fw = new FileWriter(f)) {
+            fw.write(content);
+        }
+        f.deleteOnExit();
+        return f;
+    }
+
+    @Test
+    public void testParseValorantPhantomQuestion() throws Exception {
+        String xmlContent = "<JeopardyQuestions>\n" +
+                "  <QuestionItem>\n" +
+                "    <Category>Valorant</Category>\n" +
+                "    <Value>100</Value>\n" +
+                "    <QuestionText>What is the best Phantom skin?</QuestionText>\n" +
+                "    <Options>\n" +
+                "      <OptionA>Prime</OptionA>\n" +
+                "      <OptionB>Elderflame</OptionB>\n" +
+                "      <OptionC>Reaver</OptionC>\n" +
+                "      <OptionD>Oni</OptionD>\n" +
+                "    </Options>\n" +
+                "    <CorrectAnswer>D</CorrectAnswer>\n" +
+                "  </QuestionItem>\n" +
+                "</JeopardyQuestions>";
+
+        File tempFile = writeTempFile2("valorant_phantom_XML", xmlContent);
+
+        XmlQuestionParser parser = new XmlQuestionParser();
+        List<Question> questions = parser.parse(tempFile);
+
+        assertNotNull(questions);
+        assertFalse(questions.isEmpty());
+
+        Question q = questions.get(0);
+        assertEquals("Valorant", q.getCategory());
+        assertEquals(100, q.getValue());
+        assertEquals("What is the best Phantom skin?", q.getText());
+        assertEquals("D", q.getAnswer());
+        assertEquals("Prime", q.getOptions().get("A"));
+        assertEquals("Elderflame", q.getOptions().get("B"));
+        assertEquals("Reaver", q.getOptions().get("C"));
+        assertEquals("Oni", q.getOptions().get("D"));
+    }
 }
